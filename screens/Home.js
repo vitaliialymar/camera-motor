@@ -13,13 +13,9 @@ export default function Home({ navigation }) {
     })
   })
     return (
-      <View style={{
-        flex: 1,
-        backgroundColor: '#1A1A19',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}>
-        <Pressable onPress={() => { navigation.navigate('Games')}}>
+      <View style={styles.container}>
+        <Text style={styles.h1}>CameraMotor Quiz</Text>
+        <Pressable style={styles.btn} onPress={() => { navigation.navigate('Games')}}>
           <Text style={styles.text}>Начать игру</Text>
         </Pressable>
       </View>
@@ -27,6 +23,21 @@ export default function Home({ navigation }) {
   }
 
   const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#1A1A19',
+      alignItems: 'center',
+      justifyContent: 'flex-start',
+    },
+    btn: {
+      flex: 2,
+      justifyContent: 'center',
+    },
+    h1: {
+      fontSize: 36,
+      fontWeight: 'bold',
+      color: '#FFE03D',
+    },
     text: {
         color: '#FFFFFF',
         fontSize: 30,

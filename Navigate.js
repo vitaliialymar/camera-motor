@@ -5,7 +5,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 import { Ionicons } from '@expo/vector-icons'
 import Home from './screens/Home'
 import Games from './screens/Games'
-import FirstGame from './components/games/FirstGame'
+import FirstGame from './screens/FirstGame'
 import Settings from './screens/Settings'
 import Score from './screens/Score'
 

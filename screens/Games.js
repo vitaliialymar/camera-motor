@@ -2,12 +2,7 @@ import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
 
 export default function Games({ navigation }) {
     return (
-      <View style={{
-        flex: 1,
-        backgroundColor: '#1A1A19',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}>
+      <View style={styles.container}>
         <Text style={styles.text}>Выбери игру</Text>
         <View>
           <Pressable onPress={() => navigation.navigate('FirstGame')}>
@@ -19,6 +14,12 @@ export default function Games({ navigation }) {
   }
 
   const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#1A1A19',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
     image: {
       maxHeight: 100,
       maxWidth: 50,
