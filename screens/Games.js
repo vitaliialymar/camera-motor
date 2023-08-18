@@ -1,15 +1,16 @@
 import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default function Games({ navigation }) {
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container} edges={['bottom', 'left', 'right', 'top']}>
         <Text style={styles.text}>Выбери игру</Text>
         <View>
           <Pressable onPress={() => navigation.navigate('FirstGame')}>
             <Image style={styles.image} source={require('../assets/cartom.jpg')} />
           </Pressable>
         </View>
-      </View>
+      </SafeAreaView>
     );
   }
 

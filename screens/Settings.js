@@ -1,10 +1,11 @@
-import { StyleSheet, Text, View, Pressable } from 'react-native'
+import { StyleSheet, Text } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default function Settings({ navigation }) {
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container} edges={['bottom', 'left', 'right', 'top']}>
         <Text style={styles.text}>Настройки</Text>
-      </View>
+      </SafeAreaView>
     );
   }
 

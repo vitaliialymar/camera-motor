@@ -7,16 +7,8 @@ import Navigate from './Navigate';
 export default function App() {
   return (
     <SafeAreaProvider>
-      <SafeAreaView style={styles.container} edges={['bottom', 'left', 'right', 'top']}>
         <Navigate />
-      </SafeAreaView>   
     </SafeAreaProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#1A1A19',
-  },
-});

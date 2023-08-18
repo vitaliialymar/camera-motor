@@ -15,11 +15,8 @@ function StakGroup() {
   return (
     <Stack.Navigator
     screenOptions={{
-      headerTransparent: true,
+      headerShown: false,
       presentation: 'fullScreenModal',
-      headerTitleStyle: {
-        color: '#1A1A19'
-      },
     }}
     >
       <Stack.Screen name='TabGroup' component={TabGroup} />
@@ -52,11 +49,7 @@ function TabGroup() {
           borderTopColor: '#1A1A19',
           borderTopWidth: 2,
         },
-        headerTransparent: true,
-        headerTitleStyle: {
-          color: '#1A1A19'
-        },
-        // tabBarShowLabel: false,
+        headerShown: false,
         tabBarLabelPosition: 'below-icon',
       })}
     >
@@ -72,10 +65,7 @@ function DrawerGroup() {
   return (
     <Drawer.Navigator
     screenOptions={{ 
-      headerTransparent: true,
-      headerTitleStyle: {
-        color: '#1A1A19'
-      },
+      headerShown: false,
       drawerActiveTintColor: '#FFE03D',
       drawerInactiveTintColor: 'gray',
       drawerStyle: {

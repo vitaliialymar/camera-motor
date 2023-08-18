@@ -1,6 +1,8 @@
-import { useState } from 'react';
-import { StyleSheet, Text, View, Pressable, TouchableOpacity } from 'react-native';
+import { useState } from 'react'
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import data from '../data/firstGamedata'
+import Button from '../components/Button';
 
 export default function FirstGame() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -22,7 +24,7 @@ export default function FirstGame() {
   }
 
   return ( !showScore ? 
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['bottom', 'left', 'right', 'top']}>
       <View>
         <Text style={{...styles.text, marginBottom: 50}}>{data[currentQuestion].question}</Text>
       </View>
@@ -37,12 +39,8 @@ export default function FirstGame() {
                  </TouchableOpacity>
         })}
       </View>
-      <View>
-        <Pressable style={styles.btn} onPress={nextQuestionHendler}>
-          <Text style={styles.text}>Следующий вопрос</Text>
-        </Pressable>
-      </View>
-    </View>
+      <Button label={"Следующий вопрос"} onPress={() => nextQuestionHendler()} />
+    </SafeAreaView>
    : <View style={styles.container}>
    <Text style={styles.text}>Твой результат {score}</Text>
  </View>
@@ -63,7 +61,8 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    marginVertical: 10
+    marginVertical: 10,
+    marginHorizontal: 20
   },
   text: {
     color: '#FFFFFF',
