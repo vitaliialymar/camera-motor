@@ -5,7 +5,7 @@ import Button from '../components/Button'
 
 export default function Home({ navigation }) {
     return (
-      <SafeAreaView style={styles.container} edges={['bottom', 'left', 'right', 'top']}>
+      <SafeAreaView style={styles.container}>
         <Pressable style={styles.menuIcon} onPress={() => navigation.openDrawer()}>
           <Ionicons name="ios-menu" size={24} color="#FFE03D" />
         </Pressable>
@@ -32,8 +32,8 @@ export default function Home({ navigation }) {
     },
     menuIcon: {
       position: 'absolute',
-      top: 16,
-      left: 16,
+      top: 20,
+      left: 20,
     },
   });
   

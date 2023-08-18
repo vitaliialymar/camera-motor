@@ -8,18 +8,19 @@ export default function Button({ label, onPress, name, size, color }) {
       style={{
         flexDirection: 'row',
         justifyContent: 'space-between',
+        alignItems: 'center',
         backgroundColor: '#36321D',
         borderColor: '#FFE03D',
         borderWidth: 3,
-        padding: 20,
+        padding: 15,
         borderRadius: 10,
-        marginBottom: 50,
-        width: '90%'
+        marginBottom: 30,
+        marginTop: 20,
+        width: '80%'
       }}>
       <Text
         style={{
           textAlign: 'center',
-          fontWeight: '700',
           fontSize: 25,
           color: '#FFFFFF',
         }}>

@@ -39,7 +39,11 @@ export default function FirstGame() {
                  </TouchableOpacity>
         })}
       </View>
-      <Button label={"Следующий вопрос"} onPress={() => nextQuestionHendler()} />
+      <Button
+        label={"Следующий вопрос"}
+        onPress={() => nextQuestionHendler()}
+        name="arrow-forward-ios" size={24} color="white"
+      />
     </SafeAreaView>
    : <View style={styles.container}>
    <Text style={styles.text}>Твой результат {score}</Text>
@@ -67,15 +71,7 @@ const styles = StyleSheet.create({
   text: {
     color: '#FFFFFF',
     textAlign: 'center',
+    marginHorizontal: 20,
     fontSize: 20,
-  },
-  btn: {
-    width: '100%',
-    borderColor: '#FFE03D',
-    backgroundColor: '#36321D',
-    borderWidth: 3,
-    marginTop: 50,
-    padding: 20,
-    borderRadius: 5
-}
+  }
 });
