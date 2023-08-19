@@ -2,11 +2,11 @@ import { Ionicons } from '@expo/vector-icons'
 import { StyleSheet, Pressable, Image, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Button from '../components/Button'
-
+// style={{ flex: 1 }}
 export default function Home({ navigation }) {
     return (
-      <SafeAreaView style={{ flex: 1 }} edges={['bottom', 'left', 'right', 'top']}>
-        <View style={styles.container}>
+      <SafeAreaView style={styles.container} edges={['bottom', 'left', 'right', 'top']}>
+        {/* <View style={styles.container}> */}
         <Pressable style={styles.menuIcon} onPress={() => navigation.openDrawer()}>
           <Ionicons name="ios-menu" size={24} color="#FFE03D" />
         </Pressable>
@@ -21,7 +21,7 @@ export default function Home({ navigation }) {
           color={"white"}
           width={'50%'}
         />
-        </View>
+        {/* </View> */}
       </SafeAreaView>
     )
   }

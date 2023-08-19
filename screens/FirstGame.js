@@ -74,7 +74,8 @@ export default function FirstGame() {
 
   const renderQuiz = () => {
     return (
-      <View style={styles.container}>
+      // <View style={styles.container}>
+      <View>
         <ProgressBar progress={ currentQuestion } length={ data.length }/>
         { renderQuestion() }
         <View>
@@ -98,9 +99,9 @@ export default function FirstGame() {
       </View>
     )
   }
-
+// style={{ flex: 1 }}
   return (
-    <SafeAreaView style={{ flex: 1 }} edges={['bottom', 'left', 'right', 'top']}>
+    <SafeAreaView style={styles.container} edges={['bottom', 'left', 'right', 'top']}>
       { !showScore ? renderQuiz() :  renderScore() }
     </SafeAreaView>
    
