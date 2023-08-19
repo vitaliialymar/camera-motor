@@ -5,11 +5,12 @@ import Button from '../components/Button'
 
 export default function Home({ navigation }) {
     return (
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={{ flex: 1 }} edges={['bottom', 'left', 'right', 'top']}>
+        <View style={styles.container}>
         <Pressable style={styles.menuIcon} onPress={() => navigation.openDrawer()}>
           <Ionicons name="ios-menu" size={24} color="#FFE03D" />
         </Pressable>
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <View style={{ flex: 1, justifyContent: 'center', alignSelf: 'center' }}>
           <Image source={require('../assets/logo.png')}/>
         </View>
         <Button 
@@ -18,7 +19,9 @@ export default function Home({ navigation }) {
           name={'play-arrow'}
           size={30}
           color={"white"}
+          width={'50%'}
         />
+        </View>
       </SafeAreaView>
     )
   }
@@ -27,13 +30,12 @@ export default function Home({ navigation }) {
     container: {
       flex: 1,
       backgroundColor: '#1A1A19',
-      alignItems: 'center',
-      justifyContent: 'center',
+      paddingVertical: 40,
+      paddingHorizontal: 16,
+      position:'relative'
     },
     menuIcon: {
-      position: 'absolute',
-      top: 20,
-      left: 20,
+      alignSelf: 'flex-start'
     },
   });
   

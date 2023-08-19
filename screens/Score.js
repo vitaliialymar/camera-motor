@@ -1,4 +1,5 @@
 import { StyleSheet, Text } from 'react-native'
+import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default function Score() {
@@ -13,8 +14,8 @@ export default function Score() {
     container: {
       flex: 1,
       backgroundColor: '#1A1A19',
-      alignItems: 'center',
-      justifyContent: 'center',
+      // alignItems: 'center',
+      // justifyContent: 'center',
     },
     text: {
         color: '#FFFFFF',

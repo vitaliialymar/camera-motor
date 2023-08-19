@@ -1,27 +1,24 @@
 import { Text, TouchableOpacity } from 'react-native'
 import { MaterialIcons  } from '@expo/vector-icons'
 
-export default function Button({ label, onPress, name, size, color }) {
+export default function Button({ label, onPress, name, size, color, width }) {
   return (
     <TouchableOpacity
       onPress={onPress}
       style={{
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center',
         backgroundColor: '#36321D',
         borderColor: '#FFE03D',
         borderWidth: 3,
         padding: 15,
         borderRadius: 10,
-        marginBottom: 30,
-        marginTop: 20,
-        width: '80%'
+        marginVertical: 25,
+        width: '100%'
       }}>
       <Text
         style={{
-          textAlign: 'center',
-          fontSize: 25,
+          fontSize: 20,
           color: '#FFFFFF',
         }}>
         {label}
