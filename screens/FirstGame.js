@@ -1,9 +1,10 @@
-import { useState } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { useState, useEffect } from 'react'
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-native'
+import { MaterialIcons  } from '@expo/vector-icons'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import data from '../data/firstGamedata'
-import Button from '../components/Button';
-import ProgressBar from '../components/ProgressBar';
+import ProgressBar from '../components/ProgressBar'
+import GameResult from '../components/GameResult'
 
 export default function FirstGame() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -13,6 +14,22 @@ export default function FirstGame() {
   const [disabled, setDisabled] = useState(false);
   const [showNextButton, setShowNextButton] = useState(false)
   const [showScore, setShowScore] = useState(false)
+  const [orientation, setOrientation] = useState(
+    Dimensions.get('window').width < Dimensions.get('window').height ? 'portrait' : 'landscape'
+  );
+
+  useEffect(() => {
+    const updateOrientation = () => {
+      setOrientation(
+        Dimensions.get('window').width < Dimensions.get('window').height ? 'portrait' : 'landscape'
+      );
+    };
+
+    Dimensions.addEventListener('change', updateOrientation);
+    return () => {
+      Dimensions.removeEventListener('change', updateOrientation);
+    };
+  }, [])
 
   const nextQuestionHendler = () => {
     if ((currentQuestion + 1) < data.length) {
@@ -39,11 +56,30 @@ export default function FirstGame() {
   const renderNextButton = () => {
     if(showNextButton) {
       return (
-        <Button
-          label={"Следующий вопрос"}
-          onPress={() => nextQuestionHendler()}
-          name="arrow-forward-ios" size={24} color="white" width={'100%'}
-        />
+        <View>
+        <TouchableOpacity
+      onPress={nextQuestionHendler}
+      style={{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        backgroundColor: '#36321D',
+        borderColor: '#FFE03D',
+        borderWidth: 3,
+        padding: 15,
+        borderRadius: 10,
+        marginVertical: 10,
+        width: '100%'
+      }}>
+      <Text
+        style={{
+          fontSize: 20,
+          color: '#FFFFFF',
+        }}>
+        Следующий вопрос
+      </Text>
+      <MaterialIcons name="arrow-forward-ios" size={24} color="white" />
+    </TouchableOpacity>
+    </View>
       )
     } else {
       return null
@@ -52,73 +88,84 @@ export default function FirstGame() {
 
   const renderQuestion = () => {
     return (
-      <View style={{ marginVertical: 40 }}>
+      <View style={{ marginVertical: orientation === 'portrait' ? 40 : 20 }} >
         <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
-          <Text style={{color: '#FFFFFF', fontSize: 20, opacity: 0.6, marginRight: 2}}>{currentQuestion + 1}</Text>
-          <Text style={{color: '#FFFFFF', fontSize: 18, opacity: 0.6}}>/ { data.length }</Text>
+          <Text style={{color: '#FFFFFF', fontSize: 20, opacity: 0.6}}>
+            {currentQuestion + 1}
+          </Text>
+          <Text style={{color: '#FFFFFF', fontSize: 18, opacity: 0.6}}>
+            / { data.length }
+          </Text>
         </View>
-          <Text style={{ color: '#FFFFFF', fontSize: 20 }}>
+        <View style={{height: '30%'}}>
+        <Text style={{ color: '#FFFFFF', fontSize: 20 }}>
             {data[currentQuestion].question}
           </Text>
+        </View>
       </View>
     )
   }
 
-  const renderScore = () => {
+  const orientationStyles = {
+    width: orientation === 'portrait' ? '100%' : '45%',
+    flexDirection: orientation === 'portrait' ? null : 'row',
+    flexWrap: orientation === 'portrait' ? 'nowrap' : 'wrap',
+    justifyContent: orientation === 'portrait' ? 'center' : 'space-around'
+  }
+
+  const renderOptions = () => {
     return (
-      <View style={styles.container}>
-        <Text style={styles.text}>Твой результат {score}</Text>
+      <View style={{
+        flexDirection: orientationStyles.flexDirection,
+      flexWrap: orientationStyles.flexWrap,
+      justifyContent: orientationStyles.justifyContent }}>
+        {data[currentQuestion].options.map((item, idx) => {
+          return <TouchableOpacity
+            key={idx}
+            style={{...styles.option,
+              width: orientationStyles.width,
+              borderColor: item === correctOption ? '#00C851'
+              : item === currentOptionSelected ? '#ff4444' : '#FFE03D',
+              backgroundColor: item==correctOption ? '#173120'
+              : item==currentOptionSelected ? '#38201F' : '#36321D'
+            }}
+            disabled={disabled}
+            onPress={() => answerHendler(item)}
+          >
+            <Text style={styles.text}>{item}</Text>
+          </TouchableOpacity>
+        })}
       </View>
     )
   }
 
   const renderQuiz = () => {
     return (
-      // <View style={styles.container}>
       <View>
         <ProgressBar progress={ currentQuestion } length={ data.length }/>
         { renderQuestion() }
-        <View>
-          {data[currentQuestion].options.map((item, idx) => {
-            return <TouchableOpacity
-              key={idx}
-              style={{...styles.option, 
-              borderColor: item === correctOption ? '#00C851'
-              : item === currentOptionSelected ? '#ff4444' : '#FFE03D',
-              backgroundColor: item==correctOption ? '#00C851' +'20'
-              : item==currentOptionSelected ? '#ff4444' +'20' : '#36321D'
-              }}
-              disabled={disabled}
-              onPress={() => answerHendler(item)}
-            >
-              <Text style={styles.text}>{item}</Text>
-            </TouchableOpacity>
-          })}
-        </View>
+        { renderOptions() }
         { renderNextButton() }
       </View>
     )
   }
-// style={{ flex: 1 }}
+
   return (
     <SafeAreaView style={styles.container} edges={['bottom', 'left', 'right', 'top']}>
-      { !showScore ? renderQuiz() :  renderScore() }
+      { !showScore ? renderQuiz() : <GameResult score={ score }/>}
     </SafeAreaView>
-   
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: 40,
     paddingHorizontal: 16,
     backgroundColor: '#1A1A19',
-    position:'relative'
+    // position:'relative'
   },
   option: {
-    borderWidth: 3, 
-    height: 60,
+    borderWidth: 3,
     borderRadius: 20,
     alignItems: 'center',
     justifyContent: 'center',
@@ -130,5 +177,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginHorizontal: 20,
     fontSize: 20,
-  }
-});
+    padding: 5,
+  },
+  header: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+})
+

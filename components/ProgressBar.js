@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { View, StyleSheet, Animated } from 'react-native';
+import { View, StyleSheet, Animated } from 'react-native'
 
 export default function ProgressBar({ progress, length }) {
   const [ progressWidth ] = useState(new Animated.Value(0))
