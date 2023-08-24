@@ -1,11 +1,37 @@
 import { Ionicons } from '@expo/vector-icons'
 import { StyleSheet, Pressable, Image, View, TouchableOpacity, Text } from 'react-native'
+import axios from 'axios'
 import { MaterialIcons  } from '@expo/vector-icons'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { useEffect } from 'react'
 
 export default function Home({ navigation }) {
+  useEffect(() => {
+    const getAuthHeader = () => {
+      const user = JSON.parse(localStorage.getItem('user'))
+  
+      if (user && user.token) {
+        return { Authorization: user.token }
+      }
+  
+      return {}
+    }
+
+    const checkToken = async () => {
+      try {
+        await axios.get('http://localhost:3001/api/v1/auth',
+          { headers: getAuthHeader() 
+        })
+      } catch (error) {
+        console.error('Error checking token:', error)
+        navigation.navigate('LoginScreen')
+      }
+    }
+    checkToken()
+  }, [navigation])
+
     return (
-      <SafeAreaView style={styles.container} edges={['bottom', 'left', 'right', 'top']}>
+        <SafeAreaView style={styles.container} edges={['bottom', 'left', 'right', 'top']}>
         <Pressable
           style={styles.menuIcon}
           onPress={() => navigation.openDrawer()}

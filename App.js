@@ -1,12 +1,18 @@
 import 'react-native-gesture-handler'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-import Navigate from './Navigate'
+import { NavigationContainer } from '@react-navigation/native'
+import Navigate from './navigation/Navigate'
+import { AuthProvider } from './context/AuthContext'
 // import { StatusBar } from 'expo-status-bar'
 
-export default function App() {
+export default function App({}) {
   return (
-    <SafeAreaProvider>
-      <Navigate />
-    </SafeAreaProvider>
+    <AuthProvider>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <Navigate />
+        </NavigationContainer>
+      </SafeAreaProvider>
+    </AuthProvider>
   )
 }

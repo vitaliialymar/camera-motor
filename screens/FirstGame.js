@@ -56,30 +56,17 @@ export default function FirstGame() {
   const renderNextButton = () => {
     if(showNextButton) {
       return (
-        <View>
-        <TouchableOpacity
-      onPress={nextQuestionHendler}
-      style={{
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        backgroundColor: '#36321D',
-        borderColor: '#FFE03D',
-        borderWidth: 3,
-        padding: 15,
-        borderRadius: 10,
-        marginVertical: 10,
-        width: '100%'
-      }}>
-      <Text
-        style={{
-          fontSize: 20,
-          color: '#FFFFFF',
-        }}>
-        Следующий вопрос
-      </Text>
-      <MaterialIcons name="arrow-forward-ios" size={24} color="white" />
-    </TouchableOpacity>
-    </View>
+        <View style={{ width: '90%', alignSelf: 'center' }}>
+          <TouchableOpacity
+            onPress={nextQuestionHendler}
+            style={styles.nextBtn}
+          >
+            <Text style={{ fontSize: 20, color: '#FFFFFF'  }}>
+              Следующий вопрос
+            </Text>
+            <MaterialIcons name="arrow-forward-ios" size={24} color="white" />
+          </TouchableOpacity>
+        </View>
       )
     } else {
       return null
@@ -88,7 +75,8 @@ export default function FirstGame() {
 
   const renderQuestion = () => {
     return (
-      <View style={{ marginVertical: orientation === 'portrait' ? 40 : 20 }} >
+      <View style={{
+        marginVertical: orientation === 'portrait' ? 40 : 20 }} >
         <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
           <Text style={{color: '#FFFFFF', fontSize: 20, opacity: 0.6}}>
             {currentQuestion + 1}
@@ -97,8 +85,8 @@ export default function FirstGame() {
             / { data.length }
           </Text>
         </View>
-        <View style={{height: '30%'}}>
-        <Text style={{ color: '#FFFFFF', fontSize: 20 }}>
+        <View>
+          <Text style={{ color: '#FFFFFF', fontSize: 18 }}>
             {data[currentQuestion].question}
           </Text>
         </View>
@@ -110,15 +98,16 @@ export default function FirstGame() {
     width: orientation === 'portrait' ? '100%' : '45%',
     flexDirection: orientation === 'portrait' ? null : 'row',
     flexWrap: orientation === 'portrait' ? 'nowrap' : 'wrap',
-    justifyContent: orientation === 'portrait' ? 'center' : 'space-around'
+    justifyContent: orientation === 'portrait' ? null : 'space-around'
   }
 
   const renderOptions = () => {
     return (
       <View style={{
         flexDirection: orientationStyles.flexDirection,
-      flexWrap: orientationStyles.flexWrap,
-      justifyContent: orientationStyles.justifyContent }}>
+        flexWrap: orientationStyles.flexWrap,
+        justifyContent: orientationStyles.justifyContent }}
+      >
         {data[currentQuestion].options.map((item, idx) => {
           return <TouchableOpacity
             key={idx}
@@ -160,9 +149,10 @@ export default function FirstGame() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 16,
+    paddingHorizontal: 20,
     backgroundColor: '#1A1A19',
-    // position:'relative'
+    justifyContent: 'space-between',
+    alignContent: 'center'
   },
   option: {
     borderWidth: 3,
@@ -184,5 +174,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  nextBtn: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: '#36321D',
+    borderColor: '#FFE03D',
+    borderWidth: 3,
+    padding: 15,
+    borderRadius: 10,
+    marginVertical: 10,
+  }
 })
 

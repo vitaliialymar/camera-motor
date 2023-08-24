@@ -1,13 +1,14 @@
-import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import { Ionicons } from '@expo/vector-icons'
-import Home from './screens/Home'
-import Games from './screens/Games'
-import FirstGame from './screens/FirstGame'
-import Settings from './screens/Settings'
-import Score from './screens/Score'
+import Home from '../screens/Home'
+import Games from '../screens/Games'
+import FirstGame from '../screens/FirstGame'
+import Settings from '../screens/Settings'
+import Score from '../screens/Score'
+import LoginScreen from '../screens/Login'
+import SignInScreen from '../screens/SignIn'
 
 const Stack = createNativeStackNavigator()
 
@@ -22,6 +23,8 @@ function StakGroup() {
       <Stack.Screen name='TabGroup' component={TabGroup} />
       <Stack.Screen name='Games' component={Games}/>
       <Stack.Screen name='FirstGame' component={FirstGame}/>
+      <Stack.Screen name="LoginScreen" component={LoginScreen} />
+      <Stack.Screen name="SignInScreen" component={SignInScreen} />
     </Stack.Navigator>
   )
 }
@@ -82,8 +85,7 @@ function DrawerGroup() {
 
 export default function Navigate() {
   return (
-    <NavigationContainer>
       <DrawerGroup />
-    </NavigationContainer>
-  );
-};
+  )
+}
+
