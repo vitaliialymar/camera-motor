@@ -1,17 +1,20 @@
 import React, { createContext, useState } from 'react'
+import * as SecureStore from 'expo-secure-store'
 
 export const AuthContext = createContext({})
 
 export const AuthProvider = ({ children }) => {
-  const [isLogin, setIsLogin] = useState(!!JSON.parse(localStorage.getItem('user'))?.token)
+  // const [isLogin, setIsLogin] = useState(!!JSON.parse(localStorage.getItem('user'))?.token)
+  const [isLogin, setIsLogin] = useState(!!SecureStore.getItemAsync('user'))
 
   const logIn = () => {
     setIsLogin(true)
   }
 
-  const logOut = () => {
+  const logOut = async () => {
     setIsLogin(false)
-    localStorage.removeItem('user')
+    // localStorage.removeItem('user')
+    await SecureStore.deleteItemAsync('user')
   }
 
   return (

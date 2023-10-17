@@ -21,8 +21,8 @@ export default function LoginScreen({ navigation }) {
     setPassword('')
     try {
       const { data } = await axios.post('http://localhost:3001/api/v1/login', { username, password })
-      localStorage.setItem('user', JSON.stringify(data))
-      // await SecureStore.setItemAsync('user', data.token)
+      // localStorage.setItem('user', JSON.stringify(data))
+      await SecureStore.setItemAsync('user', data.token)
       logIn()
       navigation.navigate('Home')
     } catch (err) {
