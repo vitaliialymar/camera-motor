@@ -20,7 +20,7 @@ export default function FirstGame() {
   const [orientation, setOrientation] = useState(
     Dimensions.get('window').width < Dimensions.get('window').height ? 'portrait' : 'landscape'
   )
-  const addResult = useGameStore((state) => state.addResult)
+  // const addResult = useGameStore((state) => state.addResult)
   const isNotLastQuestion = (currentQuestion + 1) < data.length
 
   useEffect(() => {
@@ -47,7 +47,7 @@ export default function FirstGame() {
       setDisabled(false)
       setShowNextButton(false)
     } else {
-      addResult({gameName: 'FirstGame', result: score})
+      // addResult({gameName: 'FirstGame', result: score})
       setShowScore(true)
     }
   }

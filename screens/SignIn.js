@@ -91,7 +91,8 @@ export default function SignInScreen ({ navigation }) {
             padding: 5,
             borderRadius: 24,
             marginHorizontal: '15%'
-          }} 
+          }}
+          disabled={isSubmit}
           onPress={() => signInHandler(username, password)}>
           <Text style={{color: '#FFFFFF', fontSize: 20, textAlign: 'center'}}>Зарегистрироваться</Text>
         </TouchableOpacity>
