@@ -8,7 +8,7 @@ export default function Profile() {
   const { logOut } = useContext(AuthContext)
 
   // const results = useGameStore((state) => state.userResults)
-  console.log(results);
+  // console.log(results);
     return (
       <SafeAreaView style={styles.container} edges={['bottom', 'left', 'right', 'top']}>
         <View>
