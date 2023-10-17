@@ -21,8 +21,8 @@ export default function SignInScreen ({ navigation }) {
     setIsSubmit(true)
     try {
       // const { data } = await axios.post('http://localhost:3001/api/v1/signup', newUser)
-      await SecureStore.setItemAsync('user', "data.token")
       // localStorage.setItem('user', JSON.stringify(data))
+      await SecureStore.setItemAsync('user', "data.token")
       logIn()
       navigation.navigate('Home')
     } catch (err) {
@@ -46,7 +46,7 @@ export default function SignInScreen ({ navigation }) {
               name="person-outline"
               size={20}
               color="#FFE03D"
-              style={{marginTop: 6, marginRight: 5}}
+              style={{marginRight: 5}}
             />
           }
           value={username}
@@ -101,7 +101,7 @@ export default function SignInScreen ({ navigation }) {
           style={{
             flexDirection: 'row',
             justifyContent: 'center',
-            marginBottom: 30,
+            marginTop: 18,
           }}>
           <Text style={styles.text}>Есть аккаунт?</Text>
           <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -116,7 +116,7 @@ export default function SignInScreen ({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1A1A19',
+    backgroundColor: '#000000',
     paddingHorizontal: 16,
     justifyContent: 'center',
     alignItems: 'center',

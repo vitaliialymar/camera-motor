@@ -9,7 +9,8 @@ export default function Home({ navigation }) {
   )
   useEffect(() => {
     const getAuthHeader = () => {
-      const user = JSON.parse(localStorage.getItem('user'))
+      // const user = JSON.parse(localStorage.getItem('user'))
+      const user = SecureStore.getItemAsync('user')
   
       if (user && user.token) {
         return { Authorization: user.token }
@@ -20,9 +21,10 @@ export default function Home({ navigation }) {
 
     const checkToken = async () => {
       try {
-        await axios.get('http://localhost:3001/api/v1/auth',
-          { headers: getAuthHeader() 
-        })
+        // await axios.get('http://localhost:3001/api/v1/auth',
+        //   { headers: getAuthHeader() 
+        // })
+        getAuthHeader() 
       } catch (error) {
         console.error('Error checking token:', error)
         navigation.navigate('LoginScreen')

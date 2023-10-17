@@ -34,6 +34,7 @@ const Tab = createBottomTabNavigator()
 function TabGroup() {
   return (
     <Tab.Navigator
+      initialRouteName='Home'
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color, focused }) => {
           let iconName;
@@ -59,8 +60,8 @@ function TabGroup() {
         // tabBarLabelPosition: 'below-icon',
       })}
     >
-      <Tab.Screen name='Home' component={Home} />
       <Tab.Screen name='Profile' component={Profile}/>
+      <Tab.Screen name='Home' component={Home} />
       <Tab.Screen name='Settings' component={Settings}/>
     </Tab.Navigator>
   )

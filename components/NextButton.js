@@ -6,7 +6,7 @@ export default function NextButton({ show, orientation, isLast, nextQuestionHend
       <View style={{ marginTop:  orientation === 'portrait' ? 24 : 0, paddingHorizontal: orientation === 'portrait' ? '20%' : '37%' }}>
         <TouchableOpacity
           onPress={nextQuestionHendler}
-          style={{...styles.nextBtn}}
+          style={styles.nextBtn}
         >
           <Text style={{ 
             fontSize: 24,

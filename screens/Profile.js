@@ -12,7 +12,7 @@ export default function Profile() {
     return (
       <SafeAreaView style={styles.container} edges={['bottom', 'left', 'right', 'top']}>
         <View>
-          <Text style={styles.text}>Score</Text>
+          <Text style={styles.text}>Тут будет кнопа выхода. Данные по пользователю. Результаты его игр.</Text>
           {/* <View style={{flexDirection: 'row'}}>
             <View>
               {results.map((result) => {
@@ -36,7 +36,7 @@ export default function Profile() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1A1A19',
+    backgroundColor: '#000000',
     // alignItems: 'center',
     // justifyContent: 'center',
   },

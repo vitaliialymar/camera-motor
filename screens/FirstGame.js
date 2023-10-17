@@ -5,11 +5,11 @@ import data from '../data/firstGamedata'
 import ProgressBar from '../components/ProgressBar'
 import GameResult from '../components/GameResult'
 import useGameStore from '../store'
-import NextButton from '../components/NextBitton'
+import NextButton from '../components/NextButton'
 import QuizOptions from '../components/QuizOptions'
 import QuizQustion from '../components/QuizQustion'
 
-export default function FirstGame() {
+export default function FirstGame({navigation}) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [currentOptionSelected, setCurrentOptionSelected] = useState(null);
@@ -61,9 +61,9 @@ export default function FirstGame() {
 
   const renderQuiz = () => {
     return (
-      <View style={{flex: 1}}>
+      <View style={{flex: 1, width: '100%'}}>
         <View style={{ marginVertical: 16 }}>
-          <ProgressBar progress={ currentQuestion } length={ data.length }/>
+          <ProgressBar progress={ currentQuestion } length={ data.length } navigation={navigation}/>
         </View>
           <QuizQustion orientation={orientation} data={data} index={currentQuestion}/>
         <QuizOptions orientation={orientation} data={data} index={currentQuestion} answer={correctOption} isRight={currentOptionSelected} disabled={disabled} answerHendler={answerHendler}/>
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 16,
-    backgroundColor: '#1A1A19',
+    backgroundColor: '#000000',
     alignItems: 'center',
   }
 })

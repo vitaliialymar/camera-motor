@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
-// import axios from 'axios'
+import axios from 'axios'
 import { useContext, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import * as SecureStore from 'expo-secure-store'
@@ -101,7 +101,7 @@ export default function LoginScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1A1A19',
+    backgroundColor: '#000000',
     paddingHorizontal: 16,
     justifyContent: 'center',
     alignItems: 'center',

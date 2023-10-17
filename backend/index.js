@@ -88,7 +88,7 @@ app.get('/api/v1/auth', authenticate, (req, res) => {
   res.send({ valid: true })
 })
 
-const PORT = 3000
+const PORT = 3001
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`)
 })
