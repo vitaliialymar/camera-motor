@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons'
 import games from '../data/games'
 import SlideItem from '../components/SlideItem'
 import Pagination from '../components/Pagination'
+import ProgressBar from '../components/ProgressBar'
 
 export default function Games({ navigation }) {
     return (
@@ -22,7 +23,7 @@ export default function Games({ navigation }) {
           keyExtractor={(item) => item.id}
           renderItem={({item}) => <SlideItem item={item} navigation={navigation} />}
           horizontal
-          pagingEnabled
+          // pagingEnabled
           showsHorizontalScrollIndicator={false}
         />
         {/* <Pagination data={games}/> */}
@@ -39,8 +40,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16
   },
   text: {
-    color: '#FFE200',
-    fontSize: 36,
+    color: '#EFEFF1',
+    fontSize: 24,
     paddingTop: 16,
     paddingBottom: 40
   }
