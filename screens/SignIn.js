@@ -2,6 +2,7 @@ import { useContext, useState } from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import axios from 'axios'
+import * as SecureStore from 'expo-secure-store'
 import { Ionicons  } from '@expo/vector-icons'
 import { AuthContext } from '../context/AuthContext'
 import Input from '../components/Input'
@@ -19,8 +20,9 @@ export default function SignInScreen ({ navigation }) {
     setIsRegistred(false)
     setIsSubmit(true)
     try {
-      const { data } = await axios.post('http://localhost:3001/api/v1/signup', newUser)
-      localStorage.setItem('user', JSON.stringify(data))
+      // const { data } = await axios.post('http://localhost:3001/api/v1/signup', newUser)
+      await SecureStore.setItemAsync('user', "data.token")
+      // localStorage.setItem('user', JSON.stringify(data))
       logIn()
       navigation.navigate('Home')
     } catch (err) {

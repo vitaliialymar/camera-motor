@@ -1,8 +1,8 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
-import axios from 'axios'
+// import axios from 'axios'
 import { useContext, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-// import * as SecureStore from 'expo-secure-store'
+import * as SecureStore from 'expo-secure-store'
 import { Ionicons  } from '@expo/vector-icons'
 import Input from '../components/Input'
 import { AuthContext } from '../context/AuthContext'
@@ -20,9 +20,9 @@ export default function LoginScreen({ navigation }) {
     setUsername('')
     setPassword('')
     try {
-      const { data } = await axios.post('http://localhost:3001/api/v1/login', { username, password })
+      // const { data } = await axios.post('http://localhost:3001/api/v1/login', { username, password })
       // localStorage.setItem('user', JSON.stringify(data))
-      await SecureStore.setItemAsync('user', data.token)
+      await SecureStore.setItemAsync('user', "data.token")
       logIn()
       navigation.navigate('Home')
     } catch (err) {
