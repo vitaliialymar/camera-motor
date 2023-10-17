@@ -9,9 +9,9 @@ export default function Games({ navigation }) {
     return (
       <SafeAreaView style={styles.container} edges={['bottom', 'left', 'right', 'top']}>
         <Ionicons name="ios-arrow-back" 
-          size={26} color="#1C1C1E"
+          size={30} color="#1C1C1E"
           onPress={() => navigation.navigate('Home')}
-          style={{alignSelf: 'flex-start', marginLeft: 16, marginTop: 16}}
+          style={{alignSelf: 'flex-start', marginTop: 16}}
           />
         <View>
           <Text style={styles.text}>Выбери игру</Text>
@@ -19,13 +19,13 @@ export default function Games({ navigation }) {
         <View>
         <FlatList 
           data={games}
-          style={{margin: 16}}
+          keyExtractor={(item) => item.id}
           renderItem={({item}) => <SlideItem item={item} navigation={navigation} />}
           horizontal
           pagingEnabled
           showsHorizontalScrollIndicator={false}
         />
-        <Pagination data={games}/>
+        {/* <Pagination data={games}/> */}
         </View>
       </SafeAreaView>
     );
@@ -36,12 +36,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#000000',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    paddingHorizontal: 16
   },
   text: {
     color: '#FFE200',
     fontSize: 36,
     paddingTop: 16,
-    paddingBottom: 36
+    paddingBottom: 40
   }
-});
+})
+

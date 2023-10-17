@@ -23,7 +23,7 @@ export default function ProgressBar({ progress, length, navigation }) {
       <View style={styles.progress}>
         <Animated.View style={[styles.progressBar, { width: variabledWidth }]} />
       </View>
-      <Ionicons name="ios-close" size={26} color="#1C1C1E" onPress={() => navigation.navigate('Games')}/>
+      <Ionicons name="ios-close" size={30} color="#1C1C1E" onPress={() => navigation.navigate('Games')}/>
     </View>
     
   )
