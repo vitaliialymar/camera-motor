@@ -28,12 +28,12 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: 20,
-    borderRadius: 20,
+    borderRadius: 24,
     backgroundColor: '#36321D'
   },
   progressBar: {
     height: 20,
-    borderRadius: 20,
+    borderRadius: 24,
     backgroundColor: '#FFE03D'
   },
 })

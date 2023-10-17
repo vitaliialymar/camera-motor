@@ -1,11 +1,12 @@
-import { Ionicons } from '@expo/vector-icons'
-import { StyleSheet, Pressable, Image, View, TouchableOpacity, Text } from 'react-native'
+import { StyleSheet, Image, View, TouchableOpacity, Text, Dimensions } from 'react-native'
 import axios from 'axios'
-import { MaterialIcons  } from '@expo/vector-icons'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function Home({ navigation }) {
+  const [orientation, setOrientation] = useState(
+    Dimensions.get('window').width < Dimensions.get('window').height ? 'portrait' : 'landscape'
+  )
   useEffect(() => {
     const getAuthHeader = () => {
       const user = JSON.parse(localStorage.getItem('user'))
@@ -30,26 +31,32 @@ export default function Home({ navigation }) {
     checkToken()
   }, [navigation])
 
+  useEffect(() => {
+    const updateOrientation = () => {
+      setOrientation(
+        Dimensions.get('window').width < Dimensions.get('window').height ? 'portrait' : 'landscape'
+      )
+    }
+
+    Dimensions.addEventListener('change', updateOrientation)
+    return () => {
+      Dimensions.removeEventListener('change', updateOrientation)
+    }
+  }, [])
+
     return (
         <SafeAreaView style={styles.container} edges={['bottom', 'left', 'right', 'top']}>
-        <Pressable
-          style={styles.menuIcon}
-          onPress={() => navigation.openDrawer()}
-        >
-          <Ionicons name="ios-menu" size={24} color="#FFE03D" />
-        </Pressable>
         <View style={styles.imageContainer}>
           <Image source={require('../assets/logo.png')}/>
         </View>
-        <View style={styles.buttonContainer}>
+        <View style={{width: orientation === 'portrait' ? '60%': '26%', marginBottom: 35}}>
           <TouchableOpacity
             onPress={() => { navigation.navigate('Games')}}
             style={styles.button}
           >
             <Text style={styles.textBtn} >
-              Начать игру
+              Играть
             </Text>
-            <MaterialIcons  name={'play-arrow'} size={30} color={"white"} />
           </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -59,13 +66,10 @@ export default function Home({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1A1A19',
+    backgroundColor: '#000000',
     paddingHorizontal: 16,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  menuIcon: {
-    alignSelf: 'flex-start'
   },
   imageContainer: {
     flex: 1,
@@ -73,22 +77,21 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   buttonContainer: {
-    marginBottom: 20,
-    width: '80%'
+    width: '60%',
+    marginBottom: 35
   },
   button: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     backgroundColor: '#36321D',
     borderColor: '#FFE03D',
     borderWidth: 3,
-    padding: 15,
-    borderRadius: 10,
-    marginBottom: 25,
+    padding: 5,
+    borderRadius: 24
   },
   textBtn: {
-    fontSize: 20,
+    fontSize: 24,
     color: '#FFFFFF',
+    textAlign: 'center'
   }
 })
 

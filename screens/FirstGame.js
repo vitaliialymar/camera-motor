@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-native'
-import { MaterialIcons  } from '@expo/vector-icons'
+import { StyleSheet, View, Dimensions } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import data from '../data/firstGamedata'
 import ProgressBar from '../components/ProgressBar'
 import GameResult from '../components/GameResult'
+import useGameStore from '../store'
+import NextButton from '../components/NextBitton'
+import QuizOptions from '../components/QuizOptions'
+import QuizQustion from '../components/QuizQustion'
 
 export default function FirstGame() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -16,29 +19,35 @@ export default function FirstGame() {
   const [showScore, setShowScore] = useState(false)
   const [orientation, setOrientation] = useState(
     Dimensions.get('window').width < Dimensions.get('window').height ? 'portrait' : 'landscape'
-  );
+  )
+  const addResult = useGameStore((state) => state.addResult)
+  const isNotLastQuestion = (currentQuestion + 1) < data.length
 
   useEffect(() => {
     const updateOrientation = () => {
       setOrientation(
         Dimensions.get('window').width < Dimensions.get('window').height ? 'portrait' : 'landscape'
-      );
-    };
+      )
+    }
 
-    Dimensions.addEventListener('change', updateOrientation);
+    Dimensions.addEventListener('change', updateOrientation)
     return () => {
-      Dimensions.removeEventListener('change', updateOrientation);
-    };
+      Dimensions.removeEventListener('change', updateOrientation)
+    }
   }, [])
 
   const nextQuestionHendler = () => {
-    if ((currentQuestion + 1) < data.length) {
+    if (correctOption === currentOptionSelected) {
+      setScore((prevScore) => prevScore + 1)
+    }
+    if (isNotLastQuestion) {
       setCurrentQuestion(currentQuestion + 1)
       setCurrentOptionSelected(null)
       setCorrectOption(null)
       setDisabled(false)
       setShowNextButton(false)
     } else {
+      addResult({gameName: 'FirstGame', result: score})
       setShowScore(true)
     }
   }
@@ -47,94 +56,18 @@ export default function FirstGame() {
     setCurrentOptionSelected(item)
     setCorrectOption(data[currentQuestion].answer)
     setDisabled(true)
-    if (correctOption === currentOptionSelected) {
-      setScore((prevScore) => prevScore + 1)
-    }
     setShowNextButton(true)
-  }
-
-  const renderNextButton = () => {
-    if(showNextButton) {
-      return (
-        <View style={{ width: '90%', alignSelf: 'center' }}>
-          <TouchableOpacity
-            onPress={nextQuestionHendler}
-            style={styles.nextBtn}
-          >
-            <Text style={{ fontSize: 20, color: '#FFFFFF'  }}>
-              Следующий вопрос
-            </Text>
-            <MaterialIcons name="arrow-forward-ios" size={24} color="white" />
-          </TouchableOpacity>
-        </View>
-      )
-    } else {
-      return null
-    }
-  }
-
-  const renderQuestion = () => {
-    return (
-      <View style={{
-        marginVertical: orientation === 'portrait' ? 40 : 20 }} >
-        <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
-          <Text style={{color: '#FFFFFF', fontSize: 20, opacity: 0.6}}>
-            {currentQuestion + 1}
-          </Text>
-          <Text style={{color: '#FFFFFF', fontSize: 18, opacity: 0.6}}>
-            / { data.length }
-          </Text>
-        </View>
-        <View>
-          <Text style={{ color: '#FFFFFF', fontSize: 18 }}>
-            {data[currentQuestion].question}
-          </Text>
-        </View>
-      </View>
-    )
-  }
-
-  const orientationStyles = {
-    width: orientation === 'portrait' ? '100%' : '45%',
-    flexDirection: orientation === 'portrait' ? null : 'row',
-    flexWrap: orientation === 'portrait' ? 'nowrap' : 'wrap',
-    justifyContent: orientation === 'portrait' ? null : 'space-around'
-  }
-
-  const renderOptions = () => {
-    return (
-      <View style={{
-        flexDirection: orientationStyles.flexDirection,
-        flexWrap: orientationStyles.flexWrap,
-        justifyContent: orientationStyles.justifyContent }}
-      >
-        {data[currentQuestion].options.map((item, idx) => {
-          return <TouchableOpacity
-            key={idx}
-            style={{...styles.option,
-              width: orientationStyles.width,
-              borderColor: item === correctOption ? '#00C851'
-              : item === currentOptionSelected ? '#ff4444' : '#FFE03D',
-              backgroundColor: item==correctOption ? '#173120'
-              : item==currentOptionSelected ? '#38201F' : '#36321D'
-            }}
-            disabled={disabled}
-            onPress={() => answerHendler(item)}
-          >
-            <Text style={styles.text}>{item}</Text>
-          </TouchableOpacity>
-        })}
-      </View>
-    )
   }
 
   const renderQuiz = () => {
     return (
-      <View>
-        <ProgressBar progress={ currentQuestion } length={ data.length }/>
-        { renderQuestion() }
-        { renderOptions() }
-        { renderNextButton() }
+      <View style={{flex: 1}}>
+        <View style={{ marginVertical: 16 }}>
+          <ProgressBar progress={ currentQuestion } length={ data.length }/>
+        </View>
+          <QuizQustion orientation={orientation} data={data} index={currentQuestion}/>
+        <QuizOptions orientation={orientation} data={data} index={currentQuestion} answer={correctOption} isRight={currentOptionSelected} disabled={disabled} answerHendler={answerHendler}/>
+        <NextButton show={showNextButton} orientation={orientation} isLast={isNotLastQuestion} nextQuestionHendler={nextQuestionHendler}/>
       </View>
     )
   }
@@ -149,40 +82,9 @@ export default function FirstGame() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 20,
+    paddingHorizontal: 16,
     backgroundColor: '#1A1A19',
-    justifyContent: 'space-between',
-    alignContent: 'center'
-  },
-  option: {
-    borderWidth: 3,
-    borderRadius: 20,
     alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 20,
-    marginVertical: 10,
-  },
-  text: {
-    color: '#FFFFFF',
-    textAlign: 'center',
-    marginHorizontal: 20,
-    fontSize: 20,
-    padding: 5,
-  },
-  header: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  nextBtn: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    backgroundColor: '#36321D',
-    borderColor: '#FFE03D',
-    borderWidth: 3,
-    padding: 15,
-    borderRadius: 10,
-    marginVertical: 10,
   }
 })
 

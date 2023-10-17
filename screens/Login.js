@@ -1,9 +1,9 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import axios from 'axios'
-import { useContext, useState, useRef, useEffect } from 'react'
+import { useContext, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 // import * as SecureStore from 'expo-secure-store'
-import { MaterialIcons, Ionicons  } from '@expo/vector-icons'
+import { Ionicons  } from '@expo/vector-icons'
 import Input from '../components/Input'
 import { AuthContext } from '../context/AuthContext'
 
@@ -12,12 +12,7 @@ export default function LoginScreen({ navigation }) {
   const [password, setPassword] = useState('')
   const [isSubmit, setIsSubmit] = useState(false)
   const [authFailed, setAuthFailed] = useState(false)
-  const inputRef = useRef(null)
   const { logIn } = useContext(AuthContext)
-
-  useEffect(() => {
-    // inputRef.focus()
-  }, [isSubmit])
 
   const logInHandler = async (username, password) => {
     setAuthFailed(false)
@@ -43,16 +38,15 @@ export default function LoginScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container} edges={['bottom', 'left', 'right', 'top']}>
       <View style={{paddingHorizontal: 10, width: '100%'}}>
-        <Text style={styles.header}>Login</Text>
+        <Text style={styles.header}>Войти</Text>
         <Input
           label={'Login'}
           icon={
-            <MaterialIcons
-            name="alternate-email"
-            size={20}
+            <Ionicons
+            name="at-sharp"
+            size={24}
             color="#FFE03D"
-            style={{marginRight: 5}}
-            ref={inputRef}
+            style={{ marginRight: 5 }}
             />
           }
           keyboardType="email-address"
@@ -66,26 +60,37 @@ export default function LoginScreen({ navigation }) {
             name="ios-lock-closed-outline"
             size={20}
             color="#FFE03D"
-            style={{marginRight: 5}}
+            style={{ marginRight: 5}}
             />
           }
           inputType="password"
           value={password}
           onChangeText={(value) => setPassword(value)}
         />
-        <TouchableOpacity disabled={isSubmit} onPress={() => logInHandler(username, password)}>
-          <Text>Login</Text>
+        <TouchableOpacity 
+          style={{ 
+            justifyContent: 'center',
+            marginVertical: 12,
+            backgroundColor: '#36321D',
+            borderColor: '#FFE03D',
+            borderWidth: 3,
+            padding: 5,
+            borderRadius: 24,
+            marginHorizontal: '15%'
+          }} 
+          disabled={isSubmit} onPress={() => logInHandler(username, password)}>
+          <Text style={{color: '#FFFFFF', fontSize: 20, textAlign: 'center'}}>Войти</Text>
         </TouchableOpacity>
-        {authFailed && <Text>неверный имя или пароль</Text>}
+        {authFailed && <Text style={{color: '#FF4444'}}>неверный имя или пароль</Text>}
         <View
           style={{
             flexDirection: 'row',
             justifyContent: 'center',
-            marginBottom: 30,
+            marginTop: 18,
           }}>
-          <Text style={styles.text}>New to the app?</Text>
+          <Text style={styles.text}>Нет аккаунта?</Text>
           <TouchableOpacity onPress={() => navigation.navigate('SignInScreen')}>
-            <Text style={{color: '#FFE03D', fontWeight: '700', fontSize: 20}}> Sign in</Text>
+            <Text style={{color: '#FFE200', fontSize: 18}}> Регистрация</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -102,13 +107,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   header: {
-    fontSize: 28,
-    color: '#FFFFFF',
-    marginBottom: 30,
+    fontSize: 36,
+    color: '#FFE200',
+    marginBottom: 25,
     textAlign: 'center'
   },
   text: {
-    fontSize: 20,
+    fontSize: 18,
     color: '#FFFFFF',
   }
 })

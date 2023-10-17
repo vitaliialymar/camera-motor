@@ -36,15 +36,15 @@ export default function SignInScreen ({ navigation }) {
   return (
     <SafeAreaView style={styles.container} edges={['bottom', 'left', 'right', 'top']}>
       <View style={{paddingHorizontal: 10, width: '100%'}}>
-        <Text style={styles.header}>Register</Text>
+        <Text style={styles.header}>Регистрация</Text>
         <Input
-          label={'Full Name'}
+          label={'Login'}
           icon={
             <Ionicons
               name="person-outline"
               size={20}
               color="#FFE03D"
-              style={{marginRight: 5}}
+              style={{marginTop: 6, marginRight: 5}}
             />
           }
           value={username}
@@ -57,7 +57,7 @@ export default function SignInScreen ({ navigation }) {
               name="ios-lock-closed-outline"
               size={20}
               color="#FFE03D"
-              style={{marginRight: 5}}
+              style={{ marginRight: 5}}
             />
           }
           inputType="password"
@@ -71,7 +71,7 @@ export default function SignInScreen ({ navigation }) {
               name="ios-lock-closed-outline"
               size={20}
               color="#FFE03D"
-              style={{marginRight: 5}}
+              style={{ marginRight: 5}}
             />
           }
           inputType="password"
@@ -79,19 +79,30 @@ export default function SignInScreen ({ navigation }) {
           onChangeText={(value) => setConfirmPassword(value)}
         />
 
-        <TouchableOpacity onPress={() => signInHandler(username, password)}>
-          <Text>Register</Text>
+        <TouchableOpacity
+          style={{ 
+            justifyContent: 'center',
+            marginVertical: 12,
+            backgroundColor: '#36321D',
+            borderColor: '#FFE03D',
+            borderWidth: 3,
+            padding: 5,
+            borderRadius: 24,
+            marginHorizontal: '15%'
+          }} 
+          onPress={() => signInHandler(username, password)}>
+          <Text style={{color: '#FFFFFF', fontSize: 20, textAlign: 'center'}}>Зарегистрироваться</Text>
         </TouchableOpacity>
-        {isRegistred && <Text>Пользователь уже существует</Text>}
+        {isRegistred && <Text style={{color: '#FF4444'}}>Пользователь уже существует</Text>}
         <View
           style={{
             flexDirection: 'row',
             justifyContent: 'center',
             marginBottom: 30,
           }}>
-          <Text style={styles.text}>Already registered?</Text>
+          <Text style={styles.text}>Есть аккаунт?</Text>
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Text style={{color: "#FFE03D", fontWeight: '700', fontSize: 20}}> Login</Text>
+            <Text style={{color: '#FFE200', fontSize: 18}}> Войти</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -108,13 +119,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   header: {
-    fontSize: 28,
-    color: '#FFFFFF',
-    marginBottom: 30,
+    fontSize: 36,
+    color: '#FFE200',
+    marginBottom: 25,
     textAlign: 'center'
   },
   text: {
-    fontSize: 20,
+    fontSize: 18,
     color: '#FFFFFF',
   }
 })
