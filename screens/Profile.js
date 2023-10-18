@@ -10,39 +10,37 @@ export default function Profile() {
   // const results = useGameStore((state) => state.userResults)
   // console.log(results);
     return (
-      <SafeAreaView style={styles.container} edges={['bottom', 'left', 'right', 'top']}>
+      <SafeAreaView style={styles.container} edges={['bottom', 'left', 'right', 'top']}> 
         <View>
-          <Text style={styles.text}>Тут будет кнопа выхода. Данные по пользователю. Результаты его игр.</Text>
-          {/* <View style={{flexDirection: 'row'}}>
-            <View>
-              {results.map((result) => {
-                <Text style={styles.text}>{result.gameName}</Text>
-              })}
-            </View>
-            <View>
-              {results.map((result) => {
-                <Text style={styles.text}>{result.result}</Text>
-              })}
-            </View>
-          </View> */}
-          <TouchableOpacity onPress={()=> logOut()}>
-            <Text>Выйти</Text>
-          </TouchableOpacity>
+          <Text style={styles.text}>Профиль</Text>
         </View>
+        <TouchableOpacity style={styles.btn} onPress={()=> logOut()}>
+          <Text style={{color: '#FFFFFF', fontSize: 21, textAlign: 'center'}}>Выйти</Text>
+        </TouchableOpacity>
       </SafeAreaView>
     )
   }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#000000',
-    // alignItems: 'center',
-    // justifyContent: 'center',
+    paddingHorizontal: 16,
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   text: {
-    color: '#FFFFFF',
-    fontSize: 30,
+    color: '#EFEFF1',
+    fontSize: 24,
+    marginTop: 16
+  },
+  btn: {
+    backgroundColor: '#36321D',
+    borderColor: '#FFE03D',
+    borderWidth: 3,
+    paddingVertical: 5,
+    paddingHorizontal: 20,
+    borderRadius: 24,
+    width: '60%'
   }
 })
 

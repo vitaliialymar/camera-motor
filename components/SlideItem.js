@@ -2,9 +2,9 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 
 export default function SlideItem({ item, navigation }) {
     return (
-      <View style={styles.container}>
-        <Image style={styles.image} source={item.img} />
-          <Text style={{fontSize: 18, color: '#999999', marginVertical: 17, textAlign: 'center'}} >{item.title}</Text>
+      <View style={{ marginHorizontal: 15, alignItems: 'center' }}>
+        <Image style={{ borderRadius: 24 }} source={item.img} />
+          <Text style={{fontSize: 18, color: '#999999', marginVertical: 10, textAlign: 'center'}} >{item.title}</Text>
           <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate(item.nav)}>
             <Text style={styles.text}>Начать</Text>
           </TouchableOpacity>
@@ -13,14 +13,6 @@ export default function SlideItem({ item, navigation }) {
   }
 
   const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      alignItems: 'center'
-    },
-    image: {
-      marginRight: 20,
-      borderRadius: 24,
-    },
     text: {
       color: '#FFFFFF',
       fontSize: 21,

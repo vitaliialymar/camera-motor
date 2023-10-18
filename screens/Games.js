@@ -3,8 +3,6 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { Ionicons } from '@expo/vector-icons'
 import games from '../data/games'
 import SlideItem from '../components/SlideItem'
-import Pagination from '../components/Pagination'
-import ProgressBar from '../components/ProgressBar'
 
 export default function Games({ navigation }) {
     return (
@@ -17,16 +15,15 @@ export default function Games({ navigation }) {
         <View>
           <Text style={styles.text}>Выбери игру</Text>
         </View>
-        <View>
+        <View style={{ width: '100%'}}>
         <FlatList 
           data={games}
           keyExtractor={(item) => item.id}
           renderItem={({item}) => <SlideItem item={item} navigation={navigation} />}
           horizontal
-          // pagingEnabled
+          pagingEnabled
           showsHorizontalScrollIndicator={false}
         />
-        {/* <Pagination data={games}/> */}
         </View>
       </SafeAreaView>
     );
@@ -41,9 +38,9 @@ const styles = StyleSheet.create({
   },
   text: {
     color: '#EFEFF1',
-    fontSize: 24,
-    paddingTop: 16,
-    paddingBottom: 40
+    fontSize: 21,
+    paddingTop: 15,
+    paddingBottom: 30
   }
 })
 
